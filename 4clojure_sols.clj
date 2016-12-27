@@ -26,4 +26,21 @@
 ;; Find the odd numbers
 (fn [lst] (filter (fn [x] (= 1 (mod x 2))) lst)) 
 
+;; Reverse a sequence : 23
+;; Works by conjoining in turn everything in the sequence. 
+(fn [lst] (reduce conj () lst))
+
+;; Palindrom Detector : 27
+;; seq has to be there to support strings.
+(fn [lst] (= (seq lst) (reverse (seq lst))))
+
+;; Fibbonaci Sequence : 26
+;; Use iterate to create a lazy sequence of pairs and just grab the first one.
+(fn [n] (take n (map first (iterate (fn [[x y]] (seq [y (+ x y)])) [1 1]))))
+
+;; Maximum Value : 38
+(fn [& args] (reduce (fn [x y] (if (>= x y) x y)) args))
+
+
+
 
