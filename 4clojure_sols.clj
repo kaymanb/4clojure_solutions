@@ -41,6 +41,21 @@
 ;; Maximum Value : 38
 (fn [& args] (reduce (fn [x y] (if (>= x y) x y)) args))
 
+;; Get the Caps : 29
+;; Notice you have to use 'apply' here because the sequence returned is lazy.
+(fn [s] (apply str (filter (fn [x] (Character/isUpperCase x)) s)))
 
+;; Duplicate a sentence : 32
+;; This could be done cheaper (using conj) if we were only dealing with
+;; vectors.
+(fn [sqnc] (reduce (fn [x y] (concat x [y y])) () sqnc))
+
+;; Implement Range : 34
+;; First time using partial, really neat way of doing things I think.
+(fn [bot top] (take (- top bot) (iterate (partial + 1) bot)))
+
+;; Compress a Sequence : 30
+;; Partition-by makes this very easy.
+(fn [sqnc] (map first (partition-by identity sqnc)))
 
 
