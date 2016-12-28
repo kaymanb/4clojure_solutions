@@ -58,4 +58,17 @@
 ;; Partition-by makes this very easy.
 (fn [sqnc] (map first (partition-by identity sqnc)))
 
+;; Factorial Fun : 42
+;; This is waayyyy simpler than how I would have done it imperitavly
+(fn [n] (reduce * (range 1 (+ n 1))))
 
+;; Interleave sequences
+;; Can also be done (fn [s1 s2] (apply concat (map (fn [a b] (conj [] a b)) s1 s2))) 
+(fn [s1 s2] (mapcat (fn [a b] (conj [] a b)) s1 s2)) 
+
+;; Flatten a sequence
+;; Simple recursion solves this. 
+(fn flat [sqnc] (if (coll? sqnc) (mapcat flat sqnc) (list sqnc)))
+
+;; Replicate a sequence
+(fn [coll n] (reduce #(concat %1 (take n (repeat %2))) [] coll))
