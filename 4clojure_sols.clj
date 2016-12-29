@@ -62,13 +62,18 @@
 ;; This is waayyyy simpler than how I would have done it imperitavly
 (fn [n] (reduce * (range 1 (+ n 1))))
 
-;; Interleave sequences
+;; Interleave sequences : 39
 ;; Can also be done (fn [s1 s2] (apply concat (map (fn [a b] (conj [] a b)) s1 s2))) 
 (fn [s1 s2] (mapcat (fn [a b] (conj [] a b)) s1 s2)) 
 
-;; Flatten a sequence
+;; Flatten a sequence : 28
 ;; Simple recursion solves this. 
 (fn flat [sqnc] (if (coll? sqnc) (mapcat flat sqnc) (list sqnc)))
 
-;; Replicate a sequence
+;; Replicate a sequence : 33
 (fn [coll n] (reduce #(concat %1 (take n (repeat %2))) [] coll))
+
+;; Interpose a sequence : 40
+;; TODO: This could be much more efficient, butlast is a bad way of removing
+;; trailing x.
+(fn [x coll] (butlast (mapcat #(list %1 x) coll)))
