@@ -77,3 +77,21 @@
 ;; TODO: This could be much more efficient, butlast is a bad way of removing
 ;; trailing x.
 (fn [x coll] (butlast (mapcat #(list %1 x) coll)))
+
+;; Pack a Sequence : 31
+(fn [coll] (partition-by identity coll))
+
+;; Drop every nth : 41
+;; First use of keep-indexed here, usefull.
+(fn [coll n] (keep-indexed #(if (= 0 (mod (inc %1) n)) nil %2) coll))
+
+;; Split a sequence : 49
+(fn [n coll] (list (take n coll) (drop n coll)))
+
+;; Advanced Destructuring : 51
+;; You need to see the question for this solution to make sense.
+[1 2 3 4 5]
+
+;; Half Truth : 83
+;; Not the use of boolean since nil != false
+(fn [& args] (if (some true? args) (boolean (some false? args)) false))
