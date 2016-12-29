@@ -95,3 +95,20 @@
 ;; Half Truth : 83
 ;; Not the use of boolean since nil != false
 (fn [& args] (if (some true? args) (boolean (some false? args)) false))
+
+;; Map Construction : 61
+(fn [ks vs] (apply merge (map #(hash-map %1 %2) ks vs)))
+
+;; Greatest Common Divisor : 66
+;; Uses the fact that gcd(a, b) = gcd(a, (b mod a))
+(fn [x y] ( if (zero? y) x (recur y (mod x y))))
+
+;; Set Intersection : 81
+(fn [a b] (set (filter #(contains? b %1) a)))
+
+;; Comparisons : 166
+(fn [f x y] (if (f x y) :lt (if (f y x) :gt :eq)))
+
+;; Re-implement Iterate : 62
+(fn [f i] (mapcat #(list ((apply comp (repeat %1 f)) i)) (range)))
+
