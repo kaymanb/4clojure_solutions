@@ -112,3 +112,17 @@
 ;; Re-implement Iterate : 62
 (fn [f i] (mapcat #(list ((apply comp (repeat %1 f)) i)) (range)))
 
+;; Simple Clojures : 107
+;; Simple exponentiation. Import 'clojure.contrib.math' to just use expt.
+(fn [n] (fn [x] (reduce * (take n (repeat x)))))
+
+;; Cartesian Product : 90
+;; Order of a and b in this solution affects answer. Note that internal elemnts
+;; are vectors not sets.
+(fn [a b] (into #{} (mapcat (fn [x] (map #(vector %1 x) a)) b)))
+
+;; Product Digits : 99
+;; Not sure if using (comp int bigdec) is the best way to go from string to
+;; integer or not, but it gets the job done.
+(fn [x y] (let [prod (* x y)] (map (comp int bigdec str) (seq (str prod)))))
+
